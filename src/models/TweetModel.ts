@@ -3,7 +3,7 @@ import { model, Schema, Document } from 'mongoose';
 export interface TweetModelInterface {
   _id?: string;
   text: string;
-  user: string;
+  user: UserModelDocumentInterface;
 }
 
 export type UserModelDocumentInterface = TweetModelInterface & Document;
