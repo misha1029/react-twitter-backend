@@ -21,10 +21,13 @@ app.get('/users', UserCtrl.index);
 app.get('/users/me', passport.authenticate('jwt'), UserCtrl.getUserInfo);
 app.get('/users/:id', UserCtrl.show);
 
+
 app.get('/tweets', TweetsCtrl.index);
 app.get('/tweets/:id', TweetsCtrl.show);
 app.post('/tweets',passport.authenticate('jwt'), createTweetValidations, TweetsCtrl.create);
+app.patch('/tweets/:id',passport.authenticate('jwt'), createTweetValidations, TweetsCtrl.update);
 app.delete('/tweets/:id', passport.authenticate('jwt'), TweetsCtrl.delete);
+
 
 app.get('/auth/verify', registerValidations, UserCtrl.verify);
 app.post('/auth/register', registerValidations, UserCtrl.create);
