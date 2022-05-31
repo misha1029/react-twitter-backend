@@ -7,7 +7,7 @@ import { isValidObjectId } from "../utils/isValidObjectId";
 class TweetsController {
   async index(_: any, res: express.Response): Promise<void> {
     try {
-      const tweets = await TweetModel.find({}).populate('user').sort({'createdAt': '-1'}).exec(); // получить все твиты
+      const tweets = await TweetModel.find({}).populate('user').sort({createdAt: '-1'}).exec(); // получить все твиты
 
       res.json({
         status: "success",
