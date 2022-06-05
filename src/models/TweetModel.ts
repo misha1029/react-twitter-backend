@@ -1,25 +1,38 @@
 import { model, Schema, Document } from 'mongoose';
+import { UserModelDocumentInterface } from './UserModel';
 
 export interface TweetModelInterface {
   _id?: string;
   text: string;
   user: UserModelDocumentInterface;
+  images?: string[];
 }
 
-export type UserModelDocumentInterface = TweetModelInterface & Document;
+export type TweetModelDocumentInterface = TweetModelInterface & Document;
 
-const TweetSchema = new Schema<TweetModelInterface>({
-  text: {
-    required: true,
-    type: String,
-    maxlength: 280,
+const TweetSchema = new Schema<TweetModelInterface>(
+  {
+    text: {
+      required: true,
+      type: String,
+      maxlength: 280,
+    },
+    user: {
+      required: true,
+      ref: 'User',
+      type: Schema.Types.ObjectId,
+    },
+    images: [
+      {
+        type: String,
+      },
+    ],
   },
-  user: {
-    required: true,
-    ref: 'User',
-    type: Schema.Types.ObjectId,
+  {
+    timestamps: true,
   },
-},{timestamps: true});
+);
 
 //@ts-ignore
-export const TweetModel = model<UserModelDocumentInterface>('Tweet', TweetSchema);
+export const TweetModel = model<TweetModelDocumentInterface>('Tweet', TweetSchema);
+
