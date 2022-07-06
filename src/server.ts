@@ -30,7 +30,7 @@ const upload = multer({ storage });
 
 
 app.get('/users', UserCtrl.index);
-app.get('/users/me', passport.authenticate('jwt'), UserCtrl.getUserInfo);
+app.get('/users/me', passport.authenticate('jwt', { session: false }), UserCtrl.getUserInfo);
 app.get('/users/:id', UserCtrl.show);
 
 
